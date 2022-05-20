@@ -39,7 +39,7 @@ export function setIsXABetterGeneratorThanYFn(isXABetterGeneratorThanYFn) {
 
 export function addGenerator(generator) {
   const numOfGeneratorsVar = generators.length
-  for(let i=0;i<numOfGeneratorsVar,i++) {
+  for(let i=0;i<numOfGeneratorsVar;i++) {
     if(isXABetterGeneratorThanY(generator, generators[i])) {
       generators.splice(i,0,generator)
       return
