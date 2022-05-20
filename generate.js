@@ -1,5 +1,5 @@
 let generators = []
-export function initGenerators(rootGenerator,testFn) {
+export function initGenerators(rootGenerator, testFn) {
   generators.length = 0
   generators.push(rootGenerator)
   generate()
@@ -21,10 +21,10 @@ export function setShouldGeneratorBeRemovedFn(shouldGeneratorBeRemovedFn) {
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
 }
 
-export function removeGenerators(shouldGeneratorBeRemovedFn) {
+export function removeUnwantedGenerators() {
   const newGenerators = []
   for(const generator of generators) {
-    if(!shouldGeneratorBeRemovedFn(generator)) {
+    if(!shouldGeneratorBeRemoved(generator)) {
       newGenerators.add(generator)
     }
   }
