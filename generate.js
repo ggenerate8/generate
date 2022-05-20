@@ -1,7 +1,11 @@
 let generators = []
-export function initGenerators(rootGenerator, testFn) {
-  generators.length = 0
-  generators.push(rootGenerator)
+let shouldGeneratorBeRemoved
+let isXABetterGeneratorThanY
+
+export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
+  shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
+  isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
+  generators=[rootGenerator]
   generate()
   testFn()
 }
@@ -16,30 +20,19 @@ export function generate() {
   }
 }
 
-let shouldGeneratorBeRemoved
-export function setShouldGeneratorBeRemovedFn(shouldGeneratorBeRemovedFn) {
-  shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
-}
-
 export function removeUnwantedGenerators() {
   const newGenerators = []
   for(const generator of generators) {
     if(!shouldGeneratorBeRemoved(generator)) {
-      newGenerators.add(generator)
+      newGenerators.push(generator)
     }
   }
   let generators = newGenerators
 }
 
-
-let isXABetterGeneratorThanY
-export function setIsXABetterGeneratorThanYFn(isXABetterGeneratorThanYFn) {
-  isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
-}
-
 export function addGenerator(generator) {
-  const numOfGeneratorsVar = generators.length
-  for(let i=0;i<numOfGeneratorsVar;i++) {
+  const len = generators.length
+  for(let i=0;i<len;i++) {
     if(isXABetterGeneratorThanY(generator, generators[i])) {
       generators.splice(i,0,generator)
       return
