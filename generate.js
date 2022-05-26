@@ -8,7 +8,7 @@ export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn
 
 export function generate() {
   const generator = generators[0]
-  generated = generator.next().value
+  const generated = generator.next().value
   if(generated==null) {
     generators.shift()
   }
