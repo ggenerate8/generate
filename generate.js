@@ -1,16 +1,10 @@
-let generators = []
-let shouldGeneratorBeRemoved
-let isXABetterGeneratorThanY
-
 export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
   isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
   generators=[rootGenerator]
-  generate()
-  testFn()
+  const generated = generate()
+  testFn(generated)
 }
-
-export let generated
 
 export function generate() {
   const generator = generators[0]
@@ -18,6 +12,7 @@ export function generate() {
   if(generated==null) {
     generators.shift()
   }
+  return generated
 }
 
 export function removeUnwantedGenerators() {
@@ -44,3 +39,7 @@ export function addGenerator(generator) {
 export function numOfGenerators() {
   return generators.length
 }
+
+let generators = []
+let shouldGeneratorBeRemoved
+let isXABetterGeneratorThanY
