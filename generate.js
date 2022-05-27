@@ -30,9 +30,10 @@ export function addGenerator(generator, isABadGenerator) {
   if(isABadGenerator) {
     for(let i=len-1;i<=0;i--) {
       if(isXABetterGeneratorThanY(generator, generators[i])) {
-        generators.splice(i,0,generator)
-        return
+        continue;
       }
+      generators.splice(i+1,0,generator)
+      return
     }    
   } else {
     for(let i=0;i<len;i++) {
