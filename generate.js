@@ -1,3 +1,6 @@
+// TODO: comment out once sure
+import { assert } from "https://asserta19.github.io/assert/assert.js";
+
 export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
   isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
@@ -25,8 +28,44 @@ export function removeUnwantedGenerators() {
   let generators = newGenerators
 }
 
-export function addGenerator(generator, isABadGenerator) {
+export function addGenerator(generator) {
   const len = generators.length
+  if(len==0) {
+    generators.push(generator);
+    return;
+  }
+  addGenerator2(generator,0,generators.length-1);
+}
+
+function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
+  while(true) {
+    assert(upperIndexInclusive<=lowerIndexInclusive)
+    if(isXABetterGeneratorThanY(generator, generators[upperIndexInclusive])) {
+      generators.splice(upperIndexInclusive,0,generator)
+      return
+    }
+    if(isXABetterGeneratorThanY(generators[lowerIndexInclusive],generator)) {
+      generators.splice(lowerIndexInclusive+1,0,generator)
+      return
+    }
+    if(upperIndexInclusive==lowerIndexInclusive) {
+      // as good as each other, put the newest one after:
+      generators.splice(lowerIndexInclusive+1,0,generator)
+      return
+    }
+    let midIndexInclusive = Math.ceil((upperIndexInclusive+lowerIndexInclusive)/2)
+    assert(upperIndexInclusive<midIndexInclusive)
+    assert(midIndexInclusive<=lowerIndexInclusive)
+    if(isXABetterGeneratorThanY(generator, generators[midIndexInclusive])) {
+      lowerIndexInclusive = midIndexInclusive - 1
+      assert(upperIndexInclusive<=lowerIndexInclusive)
+      continue
+    }
+    upperIndexInclusive = midIndexInclusive
+    assert(upperIndexInclusive<=lowerIndexInclusive)
+  }
+}
+  
   if(isABadGenerator) {
     for(let i=len-1;i<=0;i--) {
       if(isXABetterGeneratorThanY(generator, generators[i])) {
