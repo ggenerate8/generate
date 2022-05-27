@@ -62,25 +62,6 @@ function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
     assert(upperIndexInclusive<=lowerIndexInclusive)
   }
 }
-  
-  if(isABadGenerator) {
-    for(let i=len-1;i<=0;i--) {
-      if(isXABetterGeneratorThanY(generator, generators[i])) {
-        continue;
-      }
-      generators.splice(i+1,0,generator)
-      return
-    }    
-  } else {
-    for(let i=0;i<len;i++) {
-      if(isXABetterGeneratorThanY(generator, generators[i])) {
-        generators.splice(i,0,generator)
-        return
-      }
-    }
-  }
-  generators.push(generator)
-}
 
 export function numOfGenerators() {
   return generators.length
