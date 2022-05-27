@@ -1,6 +1,3 @@
-// TODO: comment out once sure
-import { assert } from "https://asserta19.github.io/assert/assert.js";
-
 export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
   isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
@@ -92,3 +89,8 @@ export function numOfGenerators() {
 let generators = []
 let shouldGeneratorBeRemoved
 let isXABetterGeneratorThanY
+
+// TODO: comment out once sure
+ function assert(x) {
+  if (!x) throw new Error("assertion failed");
+}
