@@ -25,12 +25,21 @@ export function removeUnwantedGenerators() {
   let generators = newGenerators
 }
 
-export function addGenerator(generator) {
+export function addGenerator(generator, isABadGenerator) {
   const len = generators.length
-  for(let i=0;i<len;i++) {
-    if(isXABetterGeneratorThanY(generator, generators[i])) {
-      generators.splice(i,0,generator)
-      return
+  if(isABadGenerator) {
+    for(let i=len-1;i<=0;i--) {
+      if(isXABetterGeneratorThanY(generator, generators[i])) {
+        generators.splice(i,0,generator)
+        return
+      }
+    }    
+  } else {
+    for(let i=0;i<len;i++) {
+      if(isXABetterGeneratorThanY(generator, generators[i])) {
+        generators.splice(i,0,generator)
+        return
+      }
     }
   }
   generators.push(generator)
