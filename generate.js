@@ -22,7 +22,7 @@ export function removeUnwantedGenerators() {
       newGenerators.push(generator)
     }
   }
-  let generators = newGenerators
+  generators = newGenerators
 }
 
 export function addGenerator(generator) {
