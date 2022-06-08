@@ -2,8 +2,8 @@ export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
   isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
   generators=[rootGenerator]
-  const generated = generate()
-  testFn(generated)
+  //const generated = generate()
+  //testFn(generated)
 }
 
 export function generate() {
