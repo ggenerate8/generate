@@ -1,9 +1,7 @@
-export function initGenerators(rootGenerator, testFn, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
+export function initGenerators(rootGenerator, shouldGeneratorBeRemovedFn, isXABetterGeneratorThanYFn) {
   shouldGeneratorBeRemoved = shouldGeneratorBeRemovedFn
   isXABetterGeneratorThanY = isXABetterGeneratorThanYFn
   generators=[rootGenerator]
-  //const generated = generate()
-  //testFn(generated)
 }
 
 export function generate() {
@@ -36,7 +34,7 @@ export function addGenerator(generator) {
 
 function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
   while(true) {
-    assert(upperIndexInclusive<=lowerIndexInclusive)
+    //assert(upperIndexInclusive<=lowerIndexInclusive)
     if(isXABetterGeneratorThanY(generator, generators[upperIndexInclusive])) {
       generators.splice(upperIndexInclusive,0,generator)
       return
@@ -51,15 +49,15 @@ function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
       return
     }
     let midIndexInclusive = Math.ceil((upperIndexInclusive+lowerIndexInclusive)/2)
-    assert(upperIndexInclusive<midIndexInclusive)
-    assert(midIndexInclusive<=lowerIndexInclusive)
+    //assert(upperIndexInclusive<midIndexInclusive)
+    //assert(midIndexInclusive<=lowerIndexInclusive)
     if(isXABetterGeneratorThanY(generator, generators[midIndexInclusive])) {
       lowerIndexInclusive = midIndexInclusive - 1
       assert(upperIndexInclusive<=lowerIndexInclusive)
       continue
     }
     upperIndexInclusive = midIndexInclusive
-    assert(upperIndexInclusive<=lowerIndexInclusive)
+    //assert(upperIndexInclusive<=lowerIndexInclusive)
   }
 }
 
@@ -71,7 +69,7 @@ let generators = []
 let shouldGeneratorBeRemoved
 let isXABetterGeneratorThanY
 
-// TODO: comment out once sure
- function assert(x) {
+// TODO: comment out calls to this once sure
+function assert(x) {
   if (!x) throw new Error("assertion failed");
 }
