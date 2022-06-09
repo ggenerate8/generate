@@ -29,7 +29,7 @@ export function addGenerator(generator) {
     generators.push(generator);
     return;
   }
-  addGenerator2(generator,0,generators.length-1);
+  addGenerator2(generator,0,len-1);
 }
 
 function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
