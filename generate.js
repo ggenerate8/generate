@@ -53,7 +53,7 @@ function addGenerator2(generator,upperIndexInclusive,lowerIndexInclusive) {
     //assert(midIndexInclusive<=lowerIndexInclusive)
     if(isXABetterGeneratorThanY(generator, generators[midIndexInclusive])) {
       lowerIndexInclusive = midIndexInclusive - 1
-      assert(upperIndexInclusive<=lowerIndexInclusive)
+      //assert(upperIndexInclusive<=lowerIndexInclusive)
       continue
     }
     upperIndexInclusive = midIndexInclusive
