@@ -1,3 +1,6 @@
+/**
+ * deprecated, using generatellver.jsS
+*/
 export async function initGenerators(
   rootGenerator,
   shouldGeneratorBeRemovedFn,
@@ -18,10 +21,11 @@ export async function initGenerators(
 }
 
 export async function generate() {
-  const generator = await generators[0];
+  const generator = cacheForFirstGenerator?cacheForFirstGenerator:await generators[0];
   const generated = generator.next().value;
   if (generated == null) {
     await generators.shift();
+    cacheForFirstGenerator = null;
   }
   return generated;
 }
@@ -109,6 +113,7 @@ let shouldGeneratorBeRemoved;
 let isXABetterGeneratorThanY;
 let newGenerators;
 let isSpliceFast_;
+let cacheForFirstGenerator;
 
 // TODO: comment out calls to this once sure
 function assert(x) {
